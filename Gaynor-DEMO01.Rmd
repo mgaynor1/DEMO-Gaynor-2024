@@ -1,3 +1,8 @@
+---
+output: html_document
+---
+
+
 # An introduction to Geographic And Taxonomic Occurrence R-based Scrubbing (gatoRs): An R package and workflow for processing biodiversity data
 
 Michelle L. Gaynor, Natalie N. Patten, Douglas E. Soltis, and Pamela S. Soltis
@@ -49,7 +54,7 @@ Current type from `André Michaux` 🐴 labeled ***Galax aphylla***, but that na
 
 ### rgbif
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # Load package
 library(rgbif)
 ```
@@ -122,7 +127,7 @@ unique(spocc_data$name)
 
 ### gatoRs
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # Load package
 library(gatoRs)
 ```
@@ -201,7 +206,7 @@ gatoRs_data <- basic_locality_clean(df = gatoRs_data,
 
 #### Quick Map
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # Load packages
 library(ggplot2)
 
