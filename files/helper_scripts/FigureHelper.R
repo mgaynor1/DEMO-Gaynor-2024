@@ -5,7 +5,8 @@ library(dplyr)
 library(ggplot2)
 library(spocc)
 library(gatoRs)
-
+library(rgbif)
+library(ridigbio)
 
 ## Format spocc
 spocc_data <- spocc::occ2df(spocc::occ(query = c("Galax urceolata", "Galax aphylla"),
@@ -25,9 +26,13 @@ gch <- gatoRs_data %>%
        summarize(count = n())
 gch$package <- "gatoRs"
 
+## Download from ridigbio and rgbif 
+iDigBio_data <- rbind(idig_search_records(rq=list(scientificname="Galax urceolata")), idig_search_records(rq=list(scientificname="Galax aphylla")))
+gbif_data <- occ_data(scientificName = c("Galax urceolata", "Galax aphylla"), limit = 8000)
+
 ## Format rgbif and ridigbio
 dach <- data.frame(aggregator = c("GBIF", "iDigBio"),
-                   count = c(7097, 1692),
+                   count = c((nrow(gbif_data$`Galax urceolata`$data) +  nrow(gbif_data$`Galax aphylla`$data)), nrow(iDigBio_data)),
                    package = c("rgbif", "ridigbio"))
 
 # Combined and factor
